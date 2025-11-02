@@ -8,42 +8,75 @@ from PIL import Image
 model = load_model('banana_ripeness_model.h5')
 class_names = ['Overripe', 'Ripe', 'Rotten', 'Unripe']
 
-# Set a banana-themed background using CSS
+# Page layout
+st.set_page_config(page_title="Banana Ripeness Detector", layout="wide")
+
+# CSS styling
 st.markdown("""
     <style>
-    .stApp {
-        background-image: url("https://imgur.com/gallery/banana-background-BIRib"); /* Banana wallpaper */
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-attachment: fixed;
+    body {
+        background-color: #fff3e0; /* optional banana-colored background */
     }
-    .main {
-        background-color: rgba(255, 255, 255, 0.8);
-        padding: 20px;
-        border-radius: 15px;
-        max-width: 700px;
-        margin: auto;
-        box-shadow: 0px 0px 25px rgba(0,0,0,0.2);
+    h1, h2, h3, p {
+        color: #3e2723; /* dark text for readability */
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     h1 {
-        color: #fdd835;
         text-align: center;
-        text-shadow: 2px 2px 4px #00000055;
+        color: #fdd835;
+    }
+    .instructions {
+        text-align: center;
+        background-color:#1E1E1E;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 30px;
+    }
+    .instructions h3 {
+        color: #FFE135;
+        font-size: 28px;
+        text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        margin-bottom: 10px;
+    }
+    .instructions p {
+        color: #FFD700;
+        font-size: 14px;
+        margin-top: 0;
+    }
+    .title-gif {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 150px;
+        border-radius: 15px;
+        box-shadow: 0px 0px 15px rgba(0,0,0,0.2);
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Title and app description
-st.markdown('<div class="main">', unsafe_allow_html=True)
-st.title("🍌 Banana Ripeness Detector")
-st.write("Upload a banana image to see its predicted ripeness level!")
+# Static GIF above the title
+st.markdown(
+    '<img class="title-gif" src="https://raw.githubusercontent.com/dldperez/EmergingTechnology/main/banana-gif-9.gif">',
+    unsafe_allow_html=True
+)
+
+# Title
+st.title("🍌 Banana Ripeness Detector 🍌")
+
+# Clear and styled instructions
+st.markdown("""
+    <div class="instructions">
+        <h3>Upload a banana image to see its predicted ripeness level!</h3>
+        <p>Choose a banana image from your device below.</p>
+    </div>
+""", unsafe_allow_html=True)
 
 # File uploader
-uploaded_file = st.file_uploader("Choose a banana image...", type=["jpg", "jpeg", "png"])
+uploaded_file = st.file_uploader("", type=["jpg", "jpeg", "png"])
 
 if uploaded_file is not None:
     img = Image.open(uploaded_file)
-    st.image(img, caption="Uploaded Image", use_column_width=True)
+    st.image(img, caption="Uploaded Image", use_container_width=True)
 
     # Preprocess image
     img = img.resize((128, 128))
@@ -57,5 +90,3 @@ if uploaded_file is not None:
 
     st.subheader(f"Prediction: **{class_names[class_idx]}** 🍌")
     st.write(f"Confidence: {confidence*100:.2f}%")
-
-st.markdown('</div>', unsafe_allow_html=True)
