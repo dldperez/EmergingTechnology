@@ -27,7 +27,7 @@ valid_generator = valid_datagen.flow_from_directory(
     batch_size=BATCH_SIZE,
     class_mode='categorical')
 
-# Build CNN model
+# Build CNN model using Rectified Linear Unit
 model = Sequential([
     Conv2D(32, (3,3), activation='relu', input_shape=(128,128,3)),
     MaxPooling2D(2,2),
@@ -46,11 +46,10 @@ model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accur
 # Train model
 history = model.fit( train_generator, validation_data=valid_generator, epochs=20)
 
-
 with open('training_history.pkl','wb') as f:
     pickle.dump(history.history, f)
 
-# Save trained model
+# Saving trained model
 model.save('banana_ripeness_model.h5')
 print("Model saved as banana_ripeness_model.h5")
 

@@ -14,11 +14,12 @@ st.set_page_config(page_title="Banana Ripeness Detector", layout="wide")
 # CSS styling
 st.markdown("""
     <style>
-    body {
-        background-color: #fff3e0; /* optional banana-colored background */
+    .stApp {
+        background-color: #FFE135 !important;
+        color: #3e2723;
     }
     h1, h2, h3, p {
-        color: #3e2723; /* dark text for readability */
+        color: #3e2723;
         text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
     }
     h1 {
@@ -27,7 +28,7 @@ st.markdown("""
     }
     .instructions {
         text-align: center;
-        background-color:#1E1E1E;
+        background-color: rgba(30,30,30,0.85);
         padding: 20px;
         border-radius: 10px;
         margin-bottom: 30px;
@@ -63,7 +64,7 @@ st.markdown(
 # Title
 st.title("🍌 Banana Ripeness Detector 🍌")
 
-# Clear and styled instructions
+# Instructions
 st.markdown("""
     <div class="instructions">
         <h3>Upload a banana image to see its predicted ripeness level!</h3>
@@ -87,6 +88,8 @@ if uploaded_file is not None:
     predictions = model.predict(img_array)
     class_idx = np.argmax(predictions)
     confidence = predictions[0][class_idx]
+    prediction = class_names[class_idx]
 
-    st.subheader(f"Prediction: **{class_names[class_idx]}** 🍌")
+    # Display results
+    st.subheader(f"Prediction: **{prediction}** 🍌")
     st.write(f"Confidence: {confidence*100:.2f}%")
