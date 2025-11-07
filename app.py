@@ -8,13 +8,13 @@ from PIL import Image
 model = load_model('banana_ripeness_model.h5')
 class_names = ['Overripe', 'Ripe', 'Rotten', 'Unripe']
 
-# Page layout
+#Page Title
 st.set_page_config(page_title="Banana Ripeness Detector", layout="wide")
 
 # CSS styling
 st.markdown("""
     <style>
-    .stApp {
+    .stApp {             
         background-color: #FFE135 !important;
         color: #3e2723;
     }
@@ -55,7 +55,7 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-# Static GIF above the title
+# GIFs Banana Playing Guitar
 st.markdown(
     '<img class="title-gif" src="https://raw.githubusercontent.com/dldperez/EmergingTechnology/main/banana-gif-9.gif">',
     unsafe_allow_html=True
@@ -90,6 +90,18 @@ if uploaded_file is not None:
     confidence = predictions[0][class_idx]
     prediction = class_names[class_idx]
 
-    # Display results
+    # Prediction results and confidence
     st.subheader(f"Prediction: **{prediction}** 🍌")
     st.write(f"Confidence: {confidence*100:.2f}%")
+
+#Banana Fun Fact
+st.markdown("""
+    <div class="funfact">
+        <b>🍌 Fun Fact:</b> 
+        Bananas are slightly radioactive because they are rich in potassium, 
+        and one of its natural isotopes (variants) is potassium-40, which is radioactive. 
+        A lorry full of bananas is radioactive enough to trigger a false alarm on a radiation detector 
+        looking for smuggled nuclear weapons. But you can’t become radioactive by eating bananas, 
+        because you already are radioactive!
+    </div>
+""", unsafe_allow_html=True)
