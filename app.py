@@ -64,6 +64,7 @@ st.markdown(
 # Title
 st.title("🍌 Banana Ripeness Detector 🍌")
 
+
 # Instructions
 st.markdown("""
     <div class="instructions">
