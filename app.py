@@ -27,7 +27,7 @@ st.markdown("""
         color: #fdd835;
     }
     .instructions {
-        text-align: center;
+        text-align: left;
         background-color: rgba(30,30,30,0.85);
         padding: 20px;
         border-radius: 10px;
@@ -61,15 +61,25 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+
+
 # Title
 st.title("🍌 Banana Ripeness Detector 🍌")
 
+st.markdown(
+    '<img class="title-gif" src="https://raw.githubusercontent.com/dldperez/EmergingTechnology/refs/heads/main/Banana%20Ripeness%20Classification%20Photo.png" style="display:block; margin:auto; width:70%; border-radius:15px; box-shadow:0px 0px 15px rgba(0,0,0,0.2);">',
+    unsafe_allow_html=True
+)
 
 # Instructions
 st.markdown("""
     <div class="instructions">
-        <h3>Upload a banana image to see its predicted ripeness level!</h3>
-        <p>Choose a banana image from your device below.</p>
+        <h3>INSTRUCTIONS</h3>
+        <p>1. Check the banana ripeness classes shown above to understand the types of ripeness levels the model can predict.</p>
+        <p>2. Prepare your banana image. Ensure the banana is clearly visible.</p>
+        <p>3. Upload a banana image by clicking the upload button bellow.</p>
+        <p>4. View the predicted ripeness level. </p>
+        <p>5. The system will also show its confidence level for the prediction.</p>
     </div>
 """, unsafe_allow_html=True)
 
